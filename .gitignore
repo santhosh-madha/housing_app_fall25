@@ -39,3 +39,10 @@ data/raw/
 # ----------------------------
 .DS_Store
 Thumbs.db
+
+
+# Ignore experiment model binaries
+models/lgbm__*.pkl
+models/rf__*.pkl
+models/xgb__*.pkl
+models/logreg__*.pkl

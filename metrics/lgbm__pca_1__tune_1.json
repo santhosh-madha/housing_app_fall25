@@ -1,0 +1,57 @@
+{
+  "run_id": "lgbm__pca_1__tune_1",
+  "timestamp": "2025-12-18T17:24:50.066984",
+  "f1": 0.5348837209302325,
+  "confusion_matrix": [
+    [
+      635,
+      99
+    ],
+    [
+      21,
+      69
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.9679878048780488,
+      "recall": 0.8651226158038147,
+      "f1-score": 0.9136690647482014,
+      "support": 734.0
+    },
+    "1": {
+      "precision": 0.4107142857142857,
+      "recall": 0.7666666666666667,
+      "f1-score": 0.5348837209302325,
+      "support": 90.0
+    },
+    "accuracy": 0.8543689320388349,
+    "macro avg": {
+      "precision": 0.6893510452961673,
+      "recall": 0.8158946412352407,
+      "f1-score": 0.724276392839217,
+      "support": 824.0
+    },
+    "weighted avg": {
+      "precision": 0.907120551571327,
+      "recall": 0.8543689320388349,
+      "f1-score": 0.8722968791370154,
+      "support": 824.0
+    }
+  },
+  "meta": {
+    "model_name": "lgbm",
+    "use_pca": true,
+    "use_tuning": true,
+    "best_params": {
+      "n_estimators": 482,
+      "learning_rate": 0.03324702325485189,
+      "num_leaves": 67,
+      "max_depth": 7,
+      "min_child_samples": 16,
+      "subsample": 0.8773798116223277,
+      "colsample_bytree": 0.9969956484286778
+    }
+  },
+  "model_path": "D:\\VS_Code\\Final_project\\housing_app_fall25\\models\\lgbm__pca_1__tune_1.pkl"
+}

@@ -1,0 +1,52 @@
+{
+  "run_id": "logreg__pca_1__tune_1",
+  "timestamp": "2025-12-18T17:23:27.415572",
+  "f1": 0.5118110236220472,
+  "confusion_matrix": [
+    [
+      635,
+      99
+    ],
+    [
+      25,
+      65
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.9621212121212122,
+      "recall": 0.8651226158038147,
+      "f1-score": 0.9110473457675753,
+      "support": 734.0
+    },
+    "1": {
+      "precision": 0.39634146341463417,
+      "recall": 0.7222222222222222,
+      "f1-score": 0.5118110236220472,
+      "support": 90.0
+    },
+    "accuracy": 0.8495145631067961,
+    "macro avg": {
+      "precision": 0.6792313377679231,
+      "recall": 0.7936724190130184,
+      "f1-score": 0.7114291846948113,
+      "support": 824.0
+    },
+    "weighted avg": {
+      "precision": 0.9003248803450082,
+      "recall": 0.8495145631067961,
+      "f1-score": 0.8674414367953694,
+      "support": 824.0
+    }
+  },
+  "meta": {
+    "model_name": "logreg",
+    "use_pca": true,
+    "use_tuning": true,
+    "best_params": {
+      "C": 0.021263377563188458,
+      "solver": "liblinear"
+    }
+  },
+  "model_path": "D:\\VS_Code\\Final_project\\housing_app_fall25\\models\\logreg__pca_1__tune_1.pkl"
+}

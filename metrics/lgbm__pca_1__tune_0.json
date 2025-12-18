@@ -1,0 +1,49 @@
+{
+  "run_id": "lgbm__pca_1__tune_0",
+  "timestamp": "2025-12-18T17:24:39.273371",
+  "f1": 0.5228215767634855,
+  "confusion_matrix": [
+    [
+      646,
+      88
+    ],
+    [
+      27,
+      63
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.9598811292719168,
+      "recall": 0.8801089918256131,
+      "f1-score": 0.9182658137882018,
+      "support": 734.0
+    },
+    "1": {
+      "precision": 0.41721854304635764,
+      "recall": 0.7,
+      "f1-score": 0.5228215767634855,
+      "support": 90.0
+    },
+    "accuracy": 0.8604368932038835,
+    "macro avg": {
+      "precision": 0.6885498361591372,
+      "recall": 0.7900544959128065,
+      "f1-score": 0.7205436952758437,
+      "support": 824.0
+    },
+    "weighted avg": {
+      "precision": 0.9006097302909699,
+      "recall": 0.8604368932038835,
+      "f1-score": 0.8750740888704537,
+      "support": 824.0
+    }
+  },
+  "meta": {
+    "model_name": "lgbm",
+    "use_pca": true,
+    "use_tuning": false,
+    "best_params": null
+  },
+  "model_path": "D:\\VS_Code\\Final_project\\housing_app_fall25\\models\\lgbm__pca_1__tune_0.pkl"
+}

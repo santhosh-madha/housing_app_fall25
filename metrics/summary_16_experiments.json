@@ -1,0 +1,114 @@
+[
+  {
+    "run_id": "logreg__pca_0__tune_0",
+    "model": "logreg",
+    "use_pca": false,
+    "use_tuning": false,
+    "f1": 0.6031746031746031
+  },
+  {
+    "run_id": "logreg__pca_0__tune_1",
+    "model": "logreg",
+    "use_pca": false,
+    "use_tuning": true,
+    "f1": 0.6015625
+  },
+  {
+    "run_id": "logreg__pca_1__tune_0",
+    "model": "logreg",
+    "use_pca": true,
+    "use_tuning": false,
+    "f1": 0.5203252032520326
+  },
+  {
+    "run_id": "logreg__pca_1__tune_1",
+    "model": "logreg",
+    "use_pca": true,
+    "use_tuning": true,
+    "f1": 0.5118110236220472
+  },
+  {
+    "run_id": "rf__pca_0__tune_0",
+    "model": "rf",
+    "use_pca": false,
+    "use_tuning": false,
+    "f1": 0.35294117647058826
+  },
+  {
+    "run_id": "rf__pca_0__tune_1",
+    "model": "rf",
+    "use_pca": false,
+    "use_tuning": true,
+    "f1": 0.6138613861386139
+  },
+  {
+    "run_id": "rf__pca_1__tune_0",
+    "model": "rf",
+    "use_pca": true,
+    "use_tuning": false,
+    "f1": 0.43037974683544306
+  },
+  {
+    "run_id": "rf__pca_1__tune_1",
+    "model": "rf",
+    "use_pca": true,
+    "use_tuning": true,
+    "f1": 0.5641025641025641
+  },
+  {
+    "run_id": "xgb__pca_0__tune_0",
+    "model": "xgb",
+    "use_pca": false,
+    "use_tuning": false,
+    "f1": 0.5290322580645161
+  },
+  {
+    "run_id": "xgb__pca_0__tune_1",
+    "model": "xgb",
+    "use_pca": false,
+    "use_tuning": true,
+    "f1": 0.5031446540880503
+  },
+  {
+    "run_id": "xgb__pca_1__tune_0",
+    "model": "xgb",
+    "use_pca": true,
+    "use_tuning": false,
+    "f1": 0.48951048951048953
+  },
+  {
+    "run_id": "xgb__pca_1__tune_1",
+    "model": "xgb",
+    "use_pca": true,
+    "use_tuning": true,
+    "f1": 0.5314685314685315
+  },
+  {
+    "run_id": "lgbm__pca_0__tune_0",
+    "model": "lgbm",
+    "use_pca": false,
+    "use_tuning": false,
+    "f1": 0.5714285714285714
+  },
+  {
+    "run_id": "lgbm__pca_0__tune_1",
+    "model": "lgbm",
+    "use_pca": false,
+    "use_tuning": true,
+    "f1": 0.6339285714285714
+  },
+  {
+    "run_id": "lgbm__pca_1__tune_0",
+    "model": "lgbm",
+    "use_pca": true,
+    "use_tuning": false,
+    "f1": 0.5228215767634855
+  },
+  {
+    "run_id": "lgbm__pca_1__tune_1",
+    "model": "lgbm",
+    "use_pca": true,
+    "use_tuning": true,
+    "f1": 0.5348837209302325
+  }
+]

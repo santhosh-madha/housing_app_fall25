@@ -1,0 +1,49 @@
+{
+  "run_id": "rf__pca_0__tune_0",
+  "timestamp": "2025-12-18T17:23:28.067955",
+  "f1": 0.35294117647058826,
+  "confusion_matrix": [
+    [
+      726,
+      8
+    ],
+    [
+      69,
+      21
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.9132075471698113,
+      "recall": 0.989100817438692,
+      "f1-score": 0.9496402877697842,
+      "support": 734.0
+    },
+    "1": {
+      "precision": 0.7241379310344828,
+      "recall": 0.23333333333333334,
+      "f1-score": 0.35294117647058826,
+      "support": 90.0
+    },
+    "accuracy": 0.9065533980582524,
+    "macro avg": {
+      "precision": 0.8186727391021471,
+      "recall": 0.6112170753860127,
+      "f1-score": 0.6512907321201862,
+      "support": 824.0
+    },
+    "weighted avg": {
+      "precision": 0.8925567395822147,
+      "recall": 0.9065533980582524,
+      "f1-score": 0.8844668411472991,
+      "support": 824.0
+    }
+  },
+  "meta": {
+    "model_name": "rf",
+    "use_pca": false,
+    "use_tuning": false,
+    "best_params": null
+  },
+  "model_path": "D:\\VS_Code\\Final_project\\housing_app_fall25\\models\\rf__pca_0__tune_0.pkl"
+}

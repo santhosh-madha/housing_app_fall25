@@ -1,0 +1,49 @@
+{
+  "run_id": "xgb__pca_0__tune_0",
+  "timestamp": "2025-12-18T17:24:06.501919",
+  "f1": 0.5290322580645161,
+  "confusion_matrix": [
+    [
+      710,
+      24
+    ],
+    [
+      49,
+      41
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.9354413702239789,
+      "recall": 0.9673024523160763,
+      "f1-score": 0.9511051574012056,
+      "support": 734.0
+    },
+    "1": {
+      "precision": 0.6307692307692307,
+      "recall": 0.45555555555555555,
+      "f1-score": 0.5290322580645161,
+      "support": 90.0
+    },
+    "accuracy": 0.9114077669902912,
+    "macro avg": {
+      "precision": 0.7831053004966049,
+      "recall": 0.7114290039358159,
+      "f1-score": 0.7400687077328609,
+      "support": 824.0
+    },
+    "weighted avg": {
+      "precision": 0.9021640734388728,
+      "recall": 0.9114077669902912,
+      "f1-score": 0.905004962085305,
+      "support": 824.0
+    }
+  },
+  "meta": {
+    "model_name": "xgb",
+    "use_pca": false,
+    "use_tuning": false,
+    "best_params": null
+  },
+  "model_path": "D:\\VS_Code\\Final_project\\housing_app_fall25\\models\\xgb__pca_0__tune_0.pkl"
+}

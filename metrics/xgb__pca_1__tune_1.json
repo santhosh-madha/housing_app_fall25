@@ -1,0 +1,56 @@
+{
+  "run_id": "xgb__pca_1__tune_1",
+  "timestamp": "2025-12-18T17:24:22.125141",
+  "f1": 0.5314685314685315,
+  "confusion_matrix": [
+    [
+      719,
+      15
+    ],
+    [
+      52,
+      38
+    ]
+  ],
+  "report": {
+    "0": {
+      "precision": 0.9325551232166018,
+      "recall": 0.9795640326975477,
+      "f1-score": 0.9554817275747508,
+      "support": 734.0
+    },
+    "1": {
+      "precision": 0.7169811320754716,
+      "recall": 0.4222222222222222,
+      "f1-score": 0.5314685314685315,
+      "support": 90.0
+    },
+    "accuracy": 0.9186893203883495,
+    "macro avg": {
+      "precision": 0.8247681276460368,
+      "recall": 0.700893127459885,
+      "f1-score": 0.7434751295216411,
+      "support": 824.0
+    },
+    "weighted avg": {
+      "precision": 0.9090094203007016,
+      "recall": 0.9186893203883495,
+      "f1-score": 0.909169606640819,
+      "support": 824.0
+    }
+  },
+  "meta": {
+    "model_name": "xgb",
+    "use_pca": true,
+    "use_tuning": true,
+    "best_params": {
+      "n_estimators": 408,
+      "learning_rate": 0.05379763818985296,
+      "max_depth": 2,
+      "subsample": 0.6389654140022598,
+      "colsample_bytree": 0.9220480985828153,
+      "reg_lambda": 0.0018710986730918896
+    }
+  },
+  "model_path": "D:\\VS_Code\\Final_project\\housing_app_fall25\\models\\xgb__pca_1__tune_1.pkl"
+}

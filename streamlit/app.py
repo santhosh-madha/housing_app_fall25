@@ -1,191 +1,87 @@
-import json
 import os
-from pathlib import Path
-from typing import Any, Dict
-
 import requests
 import streamlit as st
 
-# -----------------------------------------------------------------------------
-# MUST be the first Streamlit command
-# -----------------------------------------------------------------------------
-st.set_page_config(page_title="Housing Prediction", page_icon="🏠", layout="centered")
+st.set_page_config(page_title="Bank Marketing Prediction", layout="centered")
 
-# -----------------------------------------------------------------------------
-# Config
-# -----------------------------------------------------------------------------
-SCHEMA_PATH = Path("/app/data/data_schema.json")
+API_URL = os.getenv("API_URL", "http://api:8000")  # docker-compose uses service name "api"
 
-# API_URL is set in docker-compose environment
-API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
-PREDICT_ENDPOINT = f"{API_BASE_URL}/predict"
+st.title("📞 Bank Marketing Subscription Prediction")
+st.write("Predict whether a client will subscribe to a term deposit (yes/no).")
 
-# -----------------------------------------------------------------------------
-# Load schema from JSON file
-# -----------------------------------------------------------------------------
-@st.cache_resource
-def load_schema(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        raise FileNotFoundError(f"Schema file not found: {path}")
-    with open(path, "r") as f:
-        return json.load(f)
+with st.form("input_form"):
+    st.subheader("Client Info")
 
+    age = st.number_input("age", min_value=18, max_value=100, value=30)
+    duration = st.number_input("duration (seconds)", min_value=0, max_value=5000, value=200)
+    campaign = st.number_input("campaign", min_value=1, max_value=100, value=1)
+    pdays = st.number_input("pdays", min_value=-1, max_value=999, value=999)
+    previous = st.number_input("previous", min_value=0, max_value=100, value=0)
 
-schema = load_schema(SCHEMA_PATH)
+    emp_var_rate = st.number_input("emp_var_rate", value=1.1)
+    cons_price_idx = st.number_input("cons_price_idx", value=93.2)
+    cons_conf_idx = st.number_input("cons_conf_idx", value=-36.4)
+    euribor3m = st.number_input("euribor3m", value=4.8)
+    nr_employed = st.number_input("nr_employed", value=5191.0)
 
-numerical_features = schema.get("numerical", {})
-categorical_features = schema.get("categorical", {})
+    job = st.selectbox("job", ["admin.", "blue-collar", "entrepreneur", "housemaid", "management",
+                              "retired", "self-employed", "services", "student", "technician",
+                              "unemployed", "unknown"])
 
-# -----------------------------------------------------------------------------
-# Streamlit UI
-# -----------------------------------------------------------------------------
-st.title("🏠 Housing Prediction App")
-st.write(
-    f"This app sends your inputs to the FastAPI backend at **{API_BASE_URL}** for prediction."
-)
+    marital = st.selectbox("marital", ["married", "single", "divorced", "unknown"])
+    education = st.selectbox("education", ["basic.4y", "basic.6y", "basic.9y", "high.school",
+                                          "illiterate", "professional.course", "university.degree", "unknown"])
 
-st.header("Input Features")
+    default_flag = st.selectbox("default", ["no", "yes", "unknown"])
+    housing_flag = st.selectbox("housing", ["no", "yes", "unknown"])
+    loan_flag = st.selectbox("loan", ["no", "yes", "unknown"])
 
-user_input: Dict[str, Any] = {}
+    contact = st.selectbox("contact", ["cellular", "telephone"])
+    day_of_week = st.selectbox("day_of_week", ["mon", "tue", "wed", "thu", "fri"])
+    month = st.selectbox("month", ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
+    poutcome = st.selectbox("poutcome", ["failure", "nonexistent", "success"])
 
-# -----------------------------------------------------------------------------
-# Numerical Features
-# -----------------------------------------------------------------------------
-st.subheader("Numerical Features")
+    submitted = st.form_submit_button("Predict")
 
-# Decide which features use sliders
-SLIDER_FEATURES = {"longitude", "latitude", "housing_median_age", "median_income"}
-
-for feature_name, stats in numerical_features.items():
-    min_val = float(stats.get("min", 0.0))
-    max_val = float(stats.get("max", 1000.0))
-    mean_val = float(stats.get("mean", (min_val + max_val) / 2))
-    median_val = float(stats.get("median", mean_val))
-
-    # Use median as default
-    default_val = median_val
-
-    label = feature_name.replace("_", " ").title()
-    help_text = (
-        f"Min: {min_val:.2f}, Max: {max_val:.2f}, "
-        f"Mean: {mean_val:.2f}, Median: {median_val:.2f}"
-    )
-
-    if feature_name in SLIDER_FEATURES:
-        # Determine step size based on range and semantics
-        if feature_name in {"housing_median_age"}:
-            step = 1.0  # age in years, int-like
-        elif feature_name in {"median_income"}:
-            step = 0.1  # more granular
-        else:
-            # generic heuristic for latitude/longitude
-            step = 0.01
-
-        user_input[feature_name] = st.slider(
-            label,
-            min_value=min_val,
-            max_value=max_val,
-            value=float(default_val),
-            step=step,
-            help=help_text,
-            key=feature_name,
-        )
-    else:
-        # Fallback to number_input for wide-range features
-        range_val = max_val - min_val
-        if range_val > 10000:
-            step = 10.0
-        elif range_val > 1000:
-            step = 5.0
-        elif range_val > 100:
-            step = 1.0
-        elif range_val > 10:
-            step = 0.1
-        else:
-            step = 0.01
-
-        user_input[feature_name] = st.number_input(
-            label,
-            min_value=min_val,
-            max_value=max_val,
-            value=float(default_val),
-            step=step,
-            help=help_text,
-            key=feature_name,
-        )
-# -----------------------------------------------------------------------------
-# Categorical Features
-# -----------------------------------------------------------------------------
-st.subheader("Categorical Features")
-
-for feature_name, info in categorical_features.items():
-    unique_values = info.get("unique_values", [])
-    value_counts = info.get("value_counts", {})
-
-    if not unique_values:
-        continue
-
-    # Default to the most common value
-    if value_counts:
-        default_value = max(value_counts, key=value_counts.get)
-    else:
-        default_value = unique_values[0]
+if submitted:
+    payload = {
+        "age": age,
+        "duration": duration,
+        "campaign": campaign,
+        "pdays": pdays,
+        "previous": previous,
+        "emp_var_rate": emp_var_rate,
+        "cons_price_idx": cons_price_idx,
+        "cons_conf_idx": cons_conf_idx,
+        "euribor3m": euribor3m,
+        "nr_employed": nr_employed,
+        "job": job,
+        "marital": marital,
+        "education": education,
+        "default_flag": default_flag,
+        "housing_flag": housing_flag,
+        "loan_flag": loan_flag,
+        "contact": contact,
+        "day_of_week": day_of_week,
+        "month": month,
+        "poutcome": poutcome,
+    }
 
     try:
-        default_idx = unique_values.index(default_value)
-    except ValueError:
-        default_idx = 0
+        resp = requests.post(f"{API_URL}/predict", json=payload, timeout=15)
+        resp.raise_for_status()
+        out = resp.json()
 
-    label = feature_name.replace("_", " ").title()
+        pred = out["prediction"]
+        prob = out.get("probability_yes", None)
 
-    user_input[feature_name] = st.selectbox(
-        label,
-        options=unique_values,
-        index=default_idx,
-        key=feature_name,
-        help=f"Distribution: {value_counts}",
-    )
-
-st.markdown("---")
-
-# -----------------------------------------------------------------------------
-# Predict Button
-# -----------------------------------------------------------------------------
-if st.button("🔮 Predict", type="primary"):
-    payload = {"instances": [user_input]}
-
-    with st.spinner("Calling API for prediction..."):
-        try:
-            resp = requests.post(PREDICT_ENDPOINT, json=payload, timeout=30)
-        except requests.exceptions.RequestException as e:
-            st.error(f"❌ Request to API failed: {e}")
+        if pred == 1:
+            st.success("✅ Prediction: YES (client will subscribe)")
         else:
-            if resp.status_code != 200:
-                st.error(f"❌ API error: HTTP {resp.status_code} - {resp.text}")
-            else:
-                data = resp.json()
-                preds = data.get("predictions", [])
+            st.warning("❌ Prediction: NO (client will not subscribe)")
 
-                if not preds:
-                    st.warning("⚠️ No predictions returned from API.")
-                else:
-                    pred = preds[0]
-                    st.success("✅ Prediction successful!")
+        if prob is not None:
+            st.info(f"Probability(yes): {prob:.3f}")
 
-                    st.subheader("Prediction Result")
-
-                    # Display prediction with nice formatting
-                    if isinstance(pred, (int, float)):
-                        st.metric(label="Predicted Value", value=f"{pred:,.2f}")
-                    else:
-                        st.metric(label="Predicted Class", value=str(pred))
-
-                    # Show input summary in expander
-                    with st.expander("📋 View Input Summary"):
-                        st.json(user_input)
-
-st.markdown("---")
-st.caption(
-    f"📁 Schema: `{SCHEMA_PATH}`  \n"
-    f"🌐 API: `{API_BASE_URL}`"
-)
+    except Exception as e:
+        st.error(f"API call failed: {e}")

@@ -1,21 +1,41 @@
+# ----------------------------
 # Virtual environment
+# ----------------------------
 .venv/
 
+# ----------------------------
 # Python cache
+# ----------------------------
 __pycache__/
 *.pyc
 
-# Secrets
+# ----------------------------
+# Secrets (NEVER COMMIT)
+# ----------------------------
 .env
 .env.*
 
+# ----------------------------
 # Databases
+# ----------------------------
 *.sqlite3
 data/db/
 
-# Models (DO NOT COMMIT MODEL BINARIES)
-models/*.pkl
+# ----------------------------
+# Raw data (DO NOT COMMIT DATASETS)
+# ----------------------------
+data/raw/
 
+# ----------------------------
+# Models
+# ----------------------------
+# NOTE:
+# If instructor allows committing trained model, COMMENT this out.
+# Otherwise, keep it.
+# models/*.pkl
+
+# ----------------------------
 # OS files
+# ----------------------------
 .DS_Store
 Thumbs.db

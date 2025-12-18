@@ -6,13 +6,18 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends libgomp1 curl && \
     rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install deps
+COPY api/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-COPY app.py .
-COPY housing_pipeline.py .
+# Copy API code
+COPY api/app.py /app/app.py
+COPY api/housing_pipeline.py /app/housing_pipeline.py
 
+# Copy model from repo root into container
 RUN mkdir -p /app/models
+COPY models/global_best_model.pkl /app/models/global_best_model.pkl
+COPY models/global_best_model_meta.json /app/models/global_best_model_meta.json
 
 EXPOSE 8000
 

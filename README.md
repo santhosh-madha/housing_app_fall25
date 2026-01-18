@@ -1,9 +1,9 @@
-🏦 Bank Marketing Subscription Prediction
+## 🏦 Bank Marketing Subscription Prediction
 
 Project Overview
 This project predicts whether a bank customer will subscribe to a term deposit using machine learning. It includes a full ML pipeline, from data engineering and preprocessing to model deployment and a web interface.
 
-🚀 Features
+### 🚀 Features
 
 Normalized Database (3NF) – Reduces redundancy and ensures data integrity
 
@@ -25,36 +25,7 @@ Dockerized – Both API and Streamlit app
 
 Cloud Deployment – Render.com
 
-MLflow Tracking – Experiment logging and reproducibility
 
-📂 Repository Structure
-housing_app_fall25/
-│
-├── api/
-│   ├── app.py           # FastAPI backend
-│   └── Dockerfile       # API Docker container
-│
-├── streamlit/
-│   ├── app.py           # Streamlit frontend
-│   └── Dockerfile       # Streamlit Docker container
-│
-├── models/
-│   ├── global_best_model.pkl   # Best trained model
-│   └── other model files
-│
-├── src/
-│   ├── build_sqlite_db.py      # Create 3NF database
-│   ├── data_loader.py          # SQL JOIN → Pandas DataFrame
-│   ├── preprocess.py           # Feature preprocessing & pipelines
-│   └── experiments.py          # ML experiments & logging
-│
-├── data/
-│   ├── raw/                    # Original CSV (ignored in git)
-│   └── db/                     # SQLite database
-│
-├── docker-compose.yml          # Local multi-container setup
-├── requirements.txt            # Python dependencies
-└── README.md                   # Project documentation
 
 🗂 Dataset
 
